@@ -80,4 +80,27 @@ cacheSolve <- function(x, ...) {
     inverse
 }
 
-# a = matrix(1:4, 2,2)
+testCacheSolve <- function(n) {
+    # Test case for the cacheSolve function.
+    # Repeat invocation of testCacheSolve(n) for the same n will use the
+    # cached result.
+    # 
+    # Usage examples:
+    #   testCacheSolve(3)
+    #   testCacheSolve(3)   ## You should see the "cached message".
+  
+    # Calculate the inverse matrix of diag(n) which should be diag(n).
+    m <- diag(n)
+    mInv <- cacheSolve(m)
+    
+    # We expect m %*% mInv to be a diagonal matrix diag(n).
+    if (! identical(m, m %*% mInv)) {
+        # Stop with error message.
+        stop("Incorrect matrix inverse result !!")
+    } else {
+        message("The correct matrix inverse for")
+        print(m)
+        message("is")
+        print(mInv)
+    }
+}
